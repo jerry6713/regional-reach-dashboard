@@ -340,6 +340,7 @@ ui.mapWrap.addEventListener("keydown", event => {
 
 try {
   data = await loadDashboardData();
+  if (Number(data.summary?.estimatedVoters || 0) <= 0) ui.heatMetric.value = "networkCount";
   renderKpis();
   renderNationalStats();
   renderRanking();
