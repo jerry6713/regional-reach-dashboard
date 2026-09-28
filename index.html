@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Gen C — Network & Voter Reach</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <div class="brand">GEN <span>C</span></div>
+        <div>
+          <h1>Network & Voter Reach</h1>
+          <p>People · organizations · geographic coverage</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="nationalBtn" class="button button-ghost" type="button">National view</button>
+        <button id="prayerBtn" class="button button-primary" type="button">Start Prayer Mode</button>
+      </div>
+    </header>
+
+    <section class="kpis" aria-label="National summary">
+      <article class="kpi">
+        <span class="kpi-label">Registered voters</span>
+        <strong id="kpiRegistered">—</strong>
+        <small>2025 NLE baseline, current-region alignment</small>
+      </article>
+      <article class="kpi">
+        <span class="kpi-label">Network records</span>
+        <strong id="kpiRecords">—</strong>
+        <small>All logged network/contact entries</small>
+      </article>
+      <article class="kpi">
+        <span class="kpi-label">Distinct networks</span>
+        <strong id="kpiNetworks">—</strong>
+        <small>Named organizations, de-duplicated</small>
+      </article>
+      <article class="kpi">
+        <span class="kpi-label">Est. voters represented</span>
+        <strong id="kpiEstimated">—</strong>
+        <small>Explicit sourced estimates only</small>
+      </article>
+      <article class="kpi">
+        <span class="kpi-label">Regions with reach</span>
+        <strong id="kpiRegions">—</strong>
+        <small>Verified geographic tagging</small>
+      </article>
+    </section>
+
+    <main class="dashboard-grid">
+      <section class="panel map-panel">
+        <div class="panel-head map-head">
+          <div>
+            <h2>Philippine network reach</h2>
+            <p id="mapSubtitle">Click a region to zoom in and open its statistics.</p>
+          </div>
+          <label class="heat-control">
+            <span>Heat layer</span>
+            <select id="heatMetric">
+              <option value="estimatedShare">Estimated voter share</option>
+              <option value="estimatedVoters">Estimated voters</option>
+              <option value="networkCount">Network count</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="prayerBar" class="prayer-bar" hidden>
+          <button id="prevRegion" class="button button-ghost" type="button" aria-label="Previous region">← Previous</button>
+          <div class="prayer-center">
+            <span class="prayer-label">Prayer Mode</span>
+            <strong id="prayerRegion">—</strong>
+            <span id="prayerProgress">—</span>
+          </div>
+          <button id="nextRegion" class="button button-primary" type="button">Next region →</button>
+        </div>
+
+        <div id="mapWrap" class="map-wrap" tabindex="0" aria-label="Interactive map of Philippine regions">
+          <div id="mapLoading" class="map-loading">Loading Philippine regional boundaries…</div>
+          <svg id="mapSvg" viewBox="0 0 760 720" role="img" aria-label="Interactive choropleth map of the Philippines"></svg>
+          <div class="map-legend">
+            <div class="legend-title" id="legendTitle">Estimated voter share</div>
+            <div class="legend-ramp"></div>
+            <div class="legend-scale"><span>Lower</span><span>Higher</span></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-column">
+        <section class="panel region-panel" aria-live="polite">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">Selected region</span>
+              <h2 id="regionName">Philippines</h2>
+              <p id="regionCode">National overview</p>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <article><span>Official voters</span><strong id="statOfficial">—</strong></article>
+            <article><span>Est. represented</span><strong id="statEstimated">—</strong></article>
+            <article><span>Share of electorate</span><strong id="statShare">—</strong></article>
+            <article><span>Network records</span><strong id="statNetworks">—</strong></article>
+            <article><span>Mapped records</span><strong id="statMapped">—</strong></article>
+            <article><span>Estimates entered</span><strong id="statEstimates">—</strong></article>
+          </div>
+
+          <div class="comparison-block">
+            <div class="comparison-row">
+              <div>
+                <span>Estimated representation</span>
+                <strong id="comparisonPct">0.0%</strong>
+              </div>
+              <span id="comparisonText">No sourced voter estimate yet.</span>
+            </div>
+            <div class="progress-track"><div id="comparisonBar" class="progress-fill"></div></div>
+          </div>
+
+          <div class="region-notes">
+            <h3>Data quality</h3>
+            <p id="dataQuality">Select a region to review mapping and estimate coverage.</p>
+          </div>
+        </section>
+
+        <section class="panel ranking-panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">National comparison</span>
+              <h2>Regions</h2>
+            </div>
+          </div>
+          <div id="regionRanking" class="ranking-list"></div>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <span>Internal presentation dashboard. Contact-level PII is intentionally excluded.</span>
+      <span id="sourceNote">Geography: PSGC-aligned boundaries. Voter baseline: COMELEC 2025 NLE.</span>
+    </footer>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
