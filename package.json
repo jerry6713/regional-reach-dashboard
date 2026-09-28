@@ -1,0 +1,19 @@
+{
+  "name": "gen-c-principal-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Private interactive Philippine network and voter reach dashboard.",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check app.js && node --check data.js && node --check config.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0"
+  }
+}
